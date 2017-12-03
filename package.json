@@ -1,0 +1,26 @@
+{
+  "name": "spss-lup",
+  "version": "1.0.0",
+  "description": "Spatial Decision Support System for Land Use Planning Assessment in Vietnam",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thayninh/SPSS-LUP.git"
+  },
+  "author": "Nguyen Xuan Linh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thayninh/SPSS-LUP/issues"
+  },
+  "homepage": "https://github.com/thayninh/SPSS-LUP#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.13.6"
+  }
+}
