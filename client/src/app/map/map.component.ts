@@ -25,6 +25,14 @@ export class MapComponent implements OnInit {
     
     //Zoom slider
     var zoomslider = new ol.control.ZoomSlider();
+
+    //Overview map
+    var overviewMap = new ol.control.OverviewMap({
+      className: 'ol-overviewmap ol-custom-overviewmap',
+      collapseLabel: '\u00BB',
+      label: '\u00AB',
+      collapsed: true
+    });
     
     // note that the target cannot be set here!
     this.map = new ol.Map({
@@ -33,7 +41,8 @@ export class MapComponent implements OnInit {
           collapsible: false
         })
       }).extend([
-        scaleLineControl
+        scaleLineControl,
+        overviewMap
       ]),
       layers: [osm_layer],
       view: new ol.View({
