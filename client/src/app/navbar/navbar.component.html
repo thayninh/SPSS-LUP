@@ -14,10 +14,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a routerLink="/configuration">Step 1: Configuration <span class="sr-only">(current)</span></a></li>
-        <li><a routerLink="/run-model">Step 2: Run Model</a></li>
-        <li><a routerLink="/show-result">Step 3: Show Result</a></li>
-        <li><a routerLink="/download-result">Step 4: Download Result</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="/configuration">Step 1: Configuration <span class="sr-only">(current)</span></a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="/run-model">Step 2: Run Model</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="/show-result">Step 3: Show Result</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="/download-result">Step 4: Download Result</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

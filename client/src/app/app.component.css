@@ -1,5 +1,6 @@
 .main{
     height:100%;
+    padding-top: 1px;
     padding-bottom: 5px;
     padding-left: 5px;
     padding-right: 5px;
@@ -12,4 +13,8 @@
 
 .map-container{
     height: -webkit-calc(100% - 55px);
+    height: expression(100% - 55px);
+    height: -moz-calc(100% - 55px);
+    height: -o-calc(100% - 55px);
+    height: calc(100% - 55px);
 }
