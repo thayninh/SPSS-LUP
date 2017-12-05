@@ -8,22 +8,24 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand" >SPSS-LUPA</a>
+      <a routerLink="/home" class="navbar-brand" >SPSS-LUPA</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Step 1: Configuration <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Step 2: Run Model</a></li>
-        <li><a href="#">Step 3: Show Result</a></li>
-        <li><a href="#">Step 4: Download Result</a></li>
+        <li><a routerLink="/configuration">Step 1: Configuration <span class="sr-only">(current)</span></a></li>
+        <li><a routerLink="/run-model">Step 2: Run Model</a></li>
+        <li><a routerLink="/show-result">Step 3: Show Result</a></li>
+        <li><a routerLink="/download-result">Step 4: Download Result</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Utilities <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Calculate AHP</a></li>
+            <li><a href="#">Add Layer</a></li>
+            <li><a href="#">Measure Distance</a></li>
+            <li><a href="#">Measure Area</a></li>
           </ul>
         </li>
       </ul>
