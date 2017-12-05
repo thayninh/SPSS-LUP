@@ -1,18 +1,19 @@
+<form [formGroup]="form" (submit)="onSubmit()">
 <br>
 <div class="container">
   <div class="div1">
     <div class="input-group">
       <span class="input-group-btn">
-        <button type="button" class="btn btn-primary">Config</button>
+        <button (click)= "onConfig()" type="button" class="btn btn-primary">Config</button>
       </span>
-      <input type="text" class="form-control" placeholder="Please input the number of factors">
+      <input formControlName="text_config" name="text_config" type="text" class="form-control" placeholder="Please input the number of factors">
     </div>
   </div>
   <div class="div2">
     <div class="input-group">
-      <input type="text" class="form-control">
+      <input formControlName="text_submit" name="text_submit" type="text" class="form-control">
       <span class="input-group-btn">
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </span>
     </div>
   </div>
@@ -32,15 +33,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngFor="let i of arr_size">
       <td><input type="text" class="resizedTextbox1" placeholder="Input the name of factor"/></td>
-      <td><input type="text" class="resizedTextbox1" placeholder="Select data in shapfile format"/></td>
-      <td><input type="text" class="resizedTextbox2"/></td>
-      <td><input type="text" class="resizedTextbox2"/></td>
-      <td><input type="text" class="resizedTextbox2"/></td>
-      <td><input type="text" class="resizedTextbox2"/></td>
-      <td><input type="text" class="resizedTextbox2"/></td>
-      <td><input type="text" class="resizedTextbox2"/></td>
+      <td><input type="file" class="resizedTextbox2" ></td>
+      <td><input type="text" class="resizedTextbox3"/></td>
+      <td><input type="text" class="resizedTextbox3"/></td>
+      <td><input type="text" class="resizedTextbox3"/></td>
+      <td><input type="text" class="resizedTextbox3"/></td>
+      <td><input type="text" class="resizedTextbox3"/></td>
+      <td><input type="text" class="resizedTextbox3"/></td>
     </tr>
   </tbody>
 </table>
+</form>
