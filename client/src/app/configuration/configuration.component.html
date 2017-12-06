@@ -33,15 +33,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let i of arr_size">
-      <td><input type="text" class="resizedTextbox1" placeholder="Input the name of factor"/></td>
-      <td><input type="file" class="resizedTextbox2" ></td>
-      <td><input type="text" class="resizedTextbox3"/></td>
-      <td><input type="text" class="resizedTextbox3"/></td>
-      <td><input type="text" class="resizedTextbox3"/></td>
-      <td><input type="text" class="resizedTextbox3"/></td>
-      <td><input type="text" class="resizedTextbox3"/></td>
-      <td><input type="text" class="resizedTextbox3"/></td>
+    <tr *ngFor="let i of arr; let ii = index">
+      <td><input formControlName="factor_{{ii}}" name="factor_{{ii}}" type="text" class="resizedTextbox1" placeholder="Input the name of factor"/></td>
+      <td><input formControlName="data_{{ii}}" name="data_{{ii}}" type="file" class="resizedTextbox2" /></td>
+      <td><input formControlName="weight_{{ii}}" name="weight_{{ii}}" type="text" class="resizedTextbox3" /></td>
+      <td><input formControlName="FType_{{ii}}" name="FType{{ii}}" type="text" class="resizedTextbox3"/></td>
+      <td><input formControlName="Fa_{{ii}}" name="Fa_{{ii}}" type="text" class="resizedTextbox3"/></td>
+      <td><input formControlName="Fb_{{ii}}" name="Fb_{{ii}}" type="text" class="resizedTextbox3"/></td>
+      <td><input formControlName="Fc_{{ii}}" name="Fc_{{ii}}" type="text" class="resizedTextbox3"/></td>
+      <td><input formControlName="Fd_{{ii}}" name="Fd_{{ii}}" type="text" class="resizedTextbox3"/></td>
     </tr>
   </tbody>
 </table>

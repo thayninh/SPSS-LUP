@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroupName,  FormControlName, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 const uuidv1 = require('uuid/v1');
 
 @Component({
@@ -8,35 +8,52 @@ const uuidv1 = require('uuid/v1');
   styleUrls: ['./configuration.component.css']
 })
 export class ConfigurationComponent implements OnInit {
+  form: FormGroup;
+  groupControls: object;
   
+
   constructor(private formBuider: FormBuilder) { 
+    this.groupControls = {
+      text_config: '',
+      text_submit: new FormControl({value: uuidv1(), disabled:true})
+    };
+    this.form = this.formBuider.group(this.groupControls)
   }
   
   ngOnInit() {
   }
-
-//Create form group
-  form: FormGroup = this.formBuider.group({
-    text_config: '',
-    text_submit: new FormControl({value: uuidv1(), disabled:true})
-  })
-  
   
 //When user click the config, this function will be triggered and create an array with size as 
 //input from user for looping, and create an UUID
-  arr_size: number[];
+  arr: number[];
   onConfig(){
-    let i:number = this.form.get('text_config').value;
+    this.arr = this.assign_arr_size(this.form.get('text_config').value);
+    this.addControls(this.arr.length);
+  }
+  assign_arr_size(value:number){
     let arr = new Array;
-    for(let a = 0; a < i; a++){
+    for(let a = 0; a < value; a++){
       arr.push(a);
      }
-    this.arr_size = arr;
+    return arr;
+  }
+  
+  addControls(ii:number){
+    for(let i=0; i < ii; i++){
+      this.form.addControl("factor_".concat(i.toString()),new FormControl());
+      this.form.addControl("data_".concat(i.toString()),new FormControl());
+      this.form.addControl("weight_".concat(i.toString()),new FormControl());
+      this.form.addControl("FType_".concat(i.toString()),new FormControl());
+      this.form.addControl("Fa_".concat(i.toString()),new FormControl());
+      this.form.addControl("Fb_".concat(i.toString()),new FormControl());
+      this.form.addControl("Fc_".concat(i.toString()),new FormControl());
+      this.form.addControl("Fd_".concat(i.toString()),new FormControl());
+    }
   }
   
 //When user click submit button
   onSubmit(){
-    console.log('onSubmit');
+    console.log(this.arr);
   }
   
 
