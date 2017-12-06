@@ -55,12 +55,6 @@ export class ConfigurationComponent implements OnInit {
   onSubmit(){
     console.log(this.arr);
   }
-  
-
-  
-  
-  
-
 
 
 }

@@ -1,6 +1,7 @@
+
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { MapComponent } from './map/map.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { RunModelComponent } from './run-model/run-model.component';
 import { ShowResultComponent } from './show-result/show-result.component';
@@ -10,12 +11,12 @@ import { DownloadResultComponent } from './download-result/download-result.compo
 const appRoutes: Routes = [
   {
     path: '',
-    component: MapComponent, // Default Route
+    component: NavbarComponent, // Default Route
     pathMatch: 'full'
   },
   {
     path: 'home',
-    component: MapComponent, // Default Route
+    component: NavbarComponent, // Default Route
     pathMatch: 'full'
   },
   {
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: '**', 
-    component: MapComponent, 
+    component: NavbarComponent, 
     pathMatch: 'full' } // "Catch-All" Route
 ];
 

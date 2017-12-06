@@ -1,16 +1,14 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content:  space-between;
+
+.param-config{
+    width: 40%;
+    float: left;
 }
-.div1{
-    width: 31%;
-}
-.div2{
-    width: 32%;
+.submit-config{
+    width: 40%;
+    float: right;
 }
 .resizedTextbox1 {
-    width: 400px;
+    width: 350px;
     height: 30px
 }
 .resizedTextbox3 {
@@ -18,8 +16,11 @@
     height: 30px
 }
 .resizedTextbox2 {
-    width: 300px;
+    width: 250px;
     height: 30px;
     font-size: 16px;
     padding: 3px 3px;
+}
+.input-params{
+    padding-top: 5%;
 }

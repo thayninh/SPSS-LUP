@@ -1,48 +1,46 @@
-<form [formGroup]="form" (submit)="onSubmit()">
-<br>
-<div class="container">
-  <div class="div1">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button (click)= "onConfig()" type="button" class="btn btn-primary">Config</button>
-      </span>
-      <input formControlName="text_config" name="text_config" type="text" class="form-control" placeholder="Please input the number of factors">
-    </div>
-  </div>
-  <div class="div2">
-    <div class="input-group">
-      <input formControlName="text_submit" name="text_submit" type="text" class="form-control">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </span>
-    </div>
-  </div>
-</div>
-<br>
-<table class="table table-striped table-bordered ">
-  <thead>
-    <tr>
-      <th>Factor</th>
-      <th>Data</th>
-      <th>Weight</th>
-      <th>F_Type</th>
-      <th>F_a</th>
-      <th>F_b</th>
-      <th>F_c</th>
-      <th>F_d</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let i of arr; let ii = index">
-      <td><input formControlName="factor_{{ii}}" name="factor_{{ii}}" type="text" class="resizedTextbox1" placeholder="Input the name of factor"/></td>
-      <td><input formControlName="data_{{ii}}" name="data_{{ii}}" type="file" class="resizedTextbox2" /></td>
-      <td><input formControlName="weight_{{ii}}" name="weight_{{ii}}" type="text" class="resizedTextbox3" /></td>
-      <td><input formControlName="FType_{{ii}}" name="FType{{ii}}" type="text" class="resizedTextbox3"/></td>
-      <td><input formControlName="Fa_{{ii}}" name="Fa_{{ii}}" type="text" class="resizedTextbox3"/></td>
-      <td><input formControlName="Fb_{{ii}}" name="Fb_{{ii}}" type="text" class="resizedTextbox3"/></td>
-      <td><input formControlName="Fc_{{ii}}" name="Fc_{{ii}}" type="text" class="resizedTextbox3"/></td>
-      <td><input formControlName="Fd_{{ii}}" name="Fd_{{ii}}" type="text" class="resizedTextbox3"/></td>
-    </tr>
-  </tbody>
-</table>
+<form [formGroup]="form" (submit)="onSubmit()"> 
+      <div class="param-config">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button (click)= "onConfig()" type="button" class="btn btn-primary">Config</button>
+            </span>
+            <input formControlName="text_config" name="text_config" type="text" class="form-control" placeholder="Please input the number of factors">
+          </div>
+      </div>
+      <div class="submit-config">
+          <div class="input-group">
+              <input formControlName="text_submit" name="text_submit" type="text" class="form-control">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </span>
+            </div>
+      </div>
+      <div class = "input-params">
+          <table class="table table-striped table-bordered ">
+              <thead>
+                <tr>
+                  <th>Factor</th>
+                  <th>Data</th>
+                  <th>Weight</th>
+                  <th>F_Type</th>
+                  <th>F_a</th>
+                  <th>F_b</th>
+                  <th>F_c</th>
+                  <th>F_d</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let i of arr; let ii = index">
+                  <td><input formControlName="factor_{{ii}}" name="factor_{{ii}}" type="text" class="resizedTextbox1" placeholder="Input the name of factor"/></td>
+                  <td><input formControlName="data_{{ii}}" name="data_{{ii}}" type="file" class="resizedTextbox2" /></td>
+                  <td><input formControlName="weight_{{ii}}" name="weight_{{ii}}" type="text" class="resizedTextbox3" /></td>
+                  <td><input formControlName="FType_{{ii}}" name="FType{{ii}}" type="text" class="resizedTextbox3"/></td>
+                  <td><input formControlName="Fa_{{ii}}" name="Fa_{{ii}}" type="text" class="resizedTextbox3"/></td>
+                  <td><input formControlName="Fb_{{ii}}" name="Fb_{{ii}}" type="text" class="resizedTextbox3"/></td>
+                  <td><input formControlName="Fc_{{ii}}" name="Fc_{{ii}}" type="text" class="resizedTextbox3"/></td>
+                  <td><input formControlName="Fd_{{ii}}" name="Fd_{{ii}}" type="text" class="resizedTextbox3"/></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
 </form>
