@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule, FormGroupName } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,7 +27,7 @@ import { DownloadResultComponent } from './download-result/download-result.compo
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
