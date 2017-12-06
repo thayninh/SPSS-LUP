@@ -1,6 +1,10 @@
+import { SubmitConfigService } from './../services/submit-config.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroupName,  FormControlName, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-const uuidv1 = require('uuid/v1');
+
+
+import { v4 as uuid } from 'uuid';
+const id: string = uuid();
 
 @Component({
   selector: 'app-configuration',
@@ -12,10 +16,13 @@ export class ConfigurationComponent implements OnInit {
   groupControls: object;
   
 
-  constructor(private formBuider: FormBuilder) { 
+  constructor(
+    private formBuider: FormBuilder, 
+    private submitConfig: SubmitConfigService
+  ) { 
     this.groupControls = {
       text_config: '',
-      text_submit: new FormControl({value: uuidv1(), disabled:true})
+      text_submit: new FormControl({value: id, disabled:true})
     };
     this.form = this.formBuider.group(this.groupControls)
   }
@@ -53,8 +60,12 @@ export class ConfigurationComponent implements OnInit {
   
 //When user click submit button
   onSubmit(){
-    window.alert("Successfully submitted");
+    //window.alert("Successfully submitted");
+    //console.log(this.form.value);
+    const params = this.form.value;
+    params['text_submit'] = this.form.get('text_submit').value;
+    this.submitConfig.submitConfigParams(params).subscribe(data => {
+      console.log(data);
+    });
   }
-
-
 }

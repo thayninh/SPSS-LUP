@@ -1,3 +1,4 @@
+import { SubmitConfigService } from './services/submit-config.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -5,6 +6,7 @@ import { FormsModule, ReactiveFormsModule, FormGroupName } from '@angular/forms'
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
@@ -29,6 +31,7 @@ import { DownloadResultComponent } from './download-result/download-result.compo
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpModule,
     MatCardModule,
     MatButtonModule,
     MatDialogModule
@@ -36,7 +39,7 @@ import { DownloadResultComponent } from './download-result/download-result.compo
   entryComponents: [
     ConfigurationComponent,
   ],
-  providers: [],
+  providers: [SubmitConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
