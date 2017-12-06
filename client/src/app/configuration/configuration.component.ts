@@ -53,7 +53,7 @@ export class ConfigurationComponent implements OnInit {
   
 //When user click submit button
   onSubmit(){
-    console.log(this.arr);
+    window.alert("Successfully submitted");
   }
 
 

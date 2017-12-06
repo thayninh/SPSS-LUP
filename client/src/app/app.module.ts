@@ -33,6 +33,9 @@ import { DownloadResultComponent } from './download-result/download-result.compo
     MatButtonModule,
     MatDialogModule
   ],
+  entryComponents: [
+    ConfigurationComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

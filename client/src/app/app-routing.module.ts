@@ -19,26 +19,7 @@ const appRoutes: Routes = [
     component: NavbarComponent, // Default Route
     pathMatch: 'full'
   },
-  {
-    path: 'configuration',
-    component: ConfigurationComponent, // Default Route
-    pathMatch: 'full'
-  },
-  {
-    path: 'run-model',
-    component: RunModelComponent, // Default Route
-    pathMatch: 'full'
-  },
-  {
-    path: 'show-result',
-    component: ShowResultComponent, // Default Route
-    pathMatch: 'full'
-  },
-  {
-    path: 'download-result',
-    component: DownloadResultComponent, // Default Route
-    pathMatch: 'full'
-  },
+  
   { path: '**', 
     component: NavbarComponent, 
     pathMatch: 'full' } // "Catch-All" Route

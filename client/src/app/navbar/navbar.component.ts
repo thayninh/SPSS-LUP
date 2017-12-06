@@ -61,11 +61,24 @@ export class NavbarComponent implements OnInit {
     this.map.setTarget(this.mapElement.nativeElement.id);
   }
 
+//Function for openning popup that contain other components
   openConfigComponent(){
     let dialogRef = this.dialog.open(ConfigurationComponent, {
       width: '100%',
       height: '95%'
     });
+  }
+
+  openRunComponent(){
+    console.log("it is ok");
+  }
+
+  openShowComponent(){
+    console.log("it is ok");
+  }
+
+  openDownloadComponent(){
+    console.log("it is ok");
   }
 
   ngOnInit() {
