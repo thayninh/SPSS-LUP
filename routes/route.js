@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
+
 /* ==============
      Post parameters Route
   ============== */
@@ -14,8 +15,7 @@ const Schema = mongoose.Schema;
   }, {collection: 'UserData'});
 
   //Catch the parameters post from clients
-  router.post('/config', (req, res, next) => {
-    
+  router.post('/config', (req, res, next) => {  
     //Check whether or not parameters were submitted
     if(req.body.text_submit){
       res.json({ success: true, message: 'Successfully uploaded'});

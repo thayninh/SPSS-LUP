@@ -57,15 +57,28 @@ export class ConfigurationComponent implements OnInit {
       this.form.addControl("Fd_".concat(i.toString()),new FormControl());
     }
   }
-  
+
+//onFileChange
+file_array = [];
+onFileChange(fileInput: Event){
+  let file = fileInput.target.files[0];
+  this.file_array.push(file);
+}
+
 //When user click submit button
   onSubmit(){
     //window.alert("Successfully submitted");
-    //console.log(this.form.value);
+    //console.log(this.file_array);
     const params = this.form.value;
     params['text_submit'] = this.form.get('text_submit').value;
-    this.submitConfig.submitConfigParams(params).subscribe(data => {
-      console.log(data);
-    });
+
+    //Change value of data to store files uploaded
+    for(let i=0; i < Number(this.form.get('text_config').value); i++){
+      params["data_".concat(i.toString())] = this.file_array[i];
+    }
+    console.log(params);
+    // this.submitConfig.submitConfigParams(params).subscribe(data => {
+    //   console.log(data);
+    // });
   }
 }
