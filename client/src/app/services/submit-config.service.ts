@@ -10,9 +10,13 @@ export class SubmitConfigService {
 
   constructor(private http:Http) { }
 
+  //Function for uploading the configuration parameters
   submitConfigParams(params){
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.domain + '/api/config', params,{headers:headers}).map(res => res.json());
   }
+
+  //Function for uploading the uploaded files (shapefile)
+  
 }

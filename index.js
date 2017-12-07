@@ -11,7 +11,7 @@ const bodyParser = require('body-parser'); // Parse incoming request bodies in a
 const cors = require('cors'); // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
 const port = 8080;
 const route = require('./routes/route'); 
-//const upload = require('express-fileupload');
+
 
 // Database Connection
 mongoose.connect(config.uri, {
@@ -30,7 +30,7 @@ app.use(cors()); // Allows cross origin in development only
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 app.use(express.static(__dirname + '/public')); // Provide static directory for frontend
-//app.use(upload);
+
 
 //routes
 app.use('/api', route);

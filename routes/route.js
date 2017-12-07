@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
+// var multer  = require('multer');
+// var upload = multer({ dest: '../public/uploaded_data/' })
 
 
 /* ==============
@@ -14,8 +16,9 @@ const Schema = mongoose.Schema;
     text_config: {type:String, require:true, unique:true}
   }, {collection: 'UserData'});
 
-  //Catch the parameters post from clients
-  router.post('/config', (req, res, next) => {  
+  //Route for posting configuration parameters
+  router.post('/config', (req, res, next) => {
+    
     //Check whether or not parameters were submitted
     if(req.body.text_submit){
       //Receive parameters and update Schema
@@ -45,7 +48,10 @@ const Schema = mongoose.Schema;
     }else{
       res.json({ success: false, message: 'Uploaded fail' });
     }
-    
   });
 
+  //Route for uploading shapefile
+  router.post('/upload', (req, res, next) => {
+    
+  });
 module.exports = router;
