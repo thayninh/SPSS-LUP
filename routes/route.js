@@ -18,23 +18,34 @@ const Schema = mongoose.Schema;
   router.post('/config', (req, res, next) => {  
     //Check whether or not parameters were submitted
     if(req.body.text_submit){
-      res.json({ success: true, message: 'Successfully uploaded'});
+      //Receive parameters and update Schema
+      var array_key = Object.keys(req.body);
+      var object_param = {};
+      for(let i = 0; i < array_key.length; i++){
+        //Do not create data_xxx schema
+        if(array_key[i].indexOf("data_") > -1){
+          continue;
+        }else{
+          object_param[array_key[i]] = "String";
+        } 
+      } 
+      LupaSchema.add(object_param);
+
+      //Create a model and update to database
+      var param_modem = mongoose.model('param_modem', LupaSchema);
+      var params = new param_modem(req.body);
+      params.save((err)=>{
+        if(!err){
+          //Send status message
+          res.json({ success: true, message: 'Successfully uploaded'});
+        }else{
+          res.json({ success: false, message: 'Uploaded fail' });
+        }
+      });
     }else{
       res.json({ success: false, message: 'Uploaded fail' });
     }
     
-    //Receive parameters and update Schema
-    var array_key = Object.keys(req.body);
-    var object_param = {};
-    for(let i = 0; i < array_key.length; i++){
-      object_param[array_key[i]] = "String";
-    } 
-    LupaSchema.add(object_param);
-
-    //Create a model and update to database
-    var param_modem = mongoose.model('param_modem', LupaSchema);
-    var params = new param_modem(req.body);
-    params.save(); 
   });
 
 module.exports = router;

@@ -72,13 +72,14 @@ onFileChange(fileInput: Event){
     const params = this.form.value;
     params['text_submit'] = this.form.get('text_submit').value;
 
-    //Change value of data to store files uploaded
+    //Update value of data to store files uploaded
     for(let i=0; i < Number(this.form.get('text_config').value); i++){
       params["data_".concat(i.toString())] = this.file_array[i];
     }
-    console.log(params);
-    // this.submitConfig.submitConfigParams(params).subscribe(data => {
-    //   console.log(data);
-    // });
+
+    //Submit all parameters
+    this.submitConfig.submitConfigParams(params).subscribe(data => {
+      console.log(data);
+    });
   }
 }
