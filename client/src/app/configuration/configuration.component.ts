@@ -14,23 +14,23 @@ const id: string = uuid();
 export class ConfigurationComponent implements OnInit {
   form: FormGroup;
   groupControls: object;
-  
+
 
   constructor(
-    private formBuider: FormBuilder, 
+    private formBuider: FormBuilder,
     private submitConfig: SubmitConfigService
-  ) { 
+  ) {
     this.groupControls = {
       text_config: '',
       text_submit: new FormControl({value: id, disabled:true})
     };
     this.form = this.formBuider.group(this.groupControls)
   }
-  
+
   ngOnInit() {
   }
-  
-//When user click the config, this function will be triggered and create an array with size as 
+
+//When user click the config, this function will be triggered and create an array with size as
 //input from user for looping, and create an UUID
   arr: number[];
   onConfig(){
@@ -44,7 +44,7 @@ export class ConfigurationComponent implements OnInit {
      }
     return arr;
   }
-  
+
   addControls(ii:number){
     for(let i=0; i < ii; i++){
       this.form.addControl("factor_".concat(i.toString()),new FormControl());
@@ -65,23 +65,34 @@ onFileChange(fileInput: Event){
   this.file_array.push(file);
 }
 
+
+
 //When user click submit button
   onSubmit(){
 
     //console.log(this.file_array);
     const params = this.form.value;
     params['text_submit'] = this.form.get('text_submit').value;
-    
-    //Submit all parameters
+
+    //Submit config parameters
     this.submitConfig.submitConfigParams(params).subscribe(data => {
       console.log(data);
     });
-    
-    // //Update value of data to store files uploaded
-    // for(let i=0; i < Number(this.form.get('text_config').value); i++){
-    //   params["data_".concat(i.toString())] = this.file_array[i];
-    // }
 
-    
+    //Create form data
+    const formData: FormData = new FormData();
+    for(let i=0; i < Number(this.form.get('text_config').value); i++){
+      formData.append("data_".concat(i.toString()), this.file_array[i], this.file_array[i].name);
+    }
+
+    //submit shapefile files
+    this.submitConfig.submitUploadedFiles(formData).subscribe(data => {
+      console.log(data);
+    })
+
+    // //Update value of data to store files uploaded
+
+
+
   }
 }

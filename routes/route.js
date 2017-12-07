@@ -3,8 +3,16 @@ const router = express.Router();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
-// var multer  = require('multer');
-// var upload = multer({ dest: '../public/uploaded_data/' })
+var multer  = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname + '/upload')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
 
 
 /* ==============
@@ -51,7 +59,7 @@ const Schema = mongoose.Schema;
   });
 
   //Route for uploading shapefile
-  router.post('/upload', (req, res, next) => {
-    
+  router.post('/upload', upload.any(), (req, res, next) => {
   });
+
 module.exports = router;

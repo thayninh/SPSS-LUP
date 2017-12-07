@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class SubmitConfigService {
-  
+
   domain = "http://localhost:8080";
 
   constructor(private http:Http) { }
@@ -18,5 +18,7 @@ export class SubmitConfigService {
   }
 
   //Function for uploading the uploaded files (shapefile)
-  
+  submitUploadedFiles(upload_file){
+    return this.http.post(this.domain + '/api/upload', upload_file).map(res => res.json());
+  }
 }
