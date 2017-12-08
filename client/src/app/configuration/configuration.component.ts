@@ -74,24 +74,20 @@ onFileChange(fileInput: Event){
     const params = this.form.value;
     params['text_submit'] = this.form.get('text_submit').value;
 
-    //Submit config parameters
-    this.submitConfig.submitConfigParams(params).subscribe(data => {
-      console.log(data);
-    });
-
     //Create form data
     const formData: FormData = new FormData();
     for(let i=0; i < Number(this.form.get('text_config').value); i++){
       formData.append("data_".concat(i.toString()), this.file_array[i], this.file_array[i].name);
     }
 
-    //submit shapefile files
-    this.submitConfig.submitUploadedFiles(formData).subscribe(data => {
-      console.log(data);
-    })
-
-    // //Update value of data to store files uploaded
-
+    //Submit config parameters
+    this.submitConfig.submitConfigParams(params).subscribe(data => {
+      console.log("ok stage 1: upload config");
+      //submit shapefile files
+      this.submitConfig.submitUploadedFiles(formData).subscribe(data => {
+      console.log("Ok stage 2: upload files");
+      })
+    });
 
 
   }
