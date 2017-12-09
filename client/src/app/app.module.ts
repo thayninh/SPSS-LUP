@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule, FormGroupName } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule, MatButtonModule } from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
@@ -15,6 +16,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { RunModelComponent } from './run-model/run-model.component';
 import { ShowResultComponent } from './show-result/show-result.component';
 import { DownloadResultComponent } from './download-result/download-result.component';
+import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { DownloadResultComponent } from './download-result/download-result.compo
     ConfigurationComponent,
     RunModelComponent,
     ShowResultComponent,
-    DownloadResultComponent
+    DownloadResultComponent,
+    ProgressSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +37,12 @@ import { DownloadResultComponent } from './download-result/download-result.compo
     HttpModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     ConfigurationComponent,
+    ProgressSpinnerComponent
   ],
   providers: [SubmitConfigService],
   bootstrap: [AppComponent]

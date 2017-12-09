@@ -1,7 +1,10 @@
+import { element } from 'protractor';
 import { SubmitConfigService } from './../services/submit-config.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroupName,  FormControlName, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-
+import { MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { ProgressSpinnerComponent } from '../progress-spinner/progress-spinner.component';
 
 import { v4 as uuid } from 'uuid';
 const id: string = uuid();
@@ -18,7 +21,9 @@ export class ConfigurationComponent implements OnInit {
 
   constructor(
     private formBuider: FormBuilder,
-    private submitConfig: SubmitConfigService
+    private submitConfig: SubmitConfigService,
+    public dialogRef: MatDialogRef<ConfigurationComponent>,
+    public dialog: MatDialog
   ) {
     this.groupControls = {
       text_config: '',
@@ -59,34 +64,49 @@ export class ConfigurationComponent implements OnInit {
   }
 
 //onFileChange
-file_array = [];
+file_array =  new Array();
 onFileChange(fileInput: Event){
+  let name = fileInput.target.name;
   let file = fileInput.target.files[0];
-  this.file_array.push(file);
+  this.file_array[(Number(name.split('_')[1]))] = file;
 }
-
 
 
 //When user click submit button
   onSubmit(){
+    //Open progress spinner
+    let dialogRef_spinner = this.dialog.open(ProgressSpinnerComponent, {
+      // width: '50%',
+      // height: '50%'
+    });
 
-    //console.log(this.file_array);
+    //Create configuration object for submitting config data
     const params = this.form.value;
     params['text_submit'] = this.form.get('text_submit').value;
+    for(let i = 0; i < Number(this.form.get('text_config').value); i++){
+      params['data_'.concat(i.toString())] = this.file_array[i].name;
+    };
 
     //Create form data
     const formData: FormData = new FormData();
     for(let i=0; i < Number(this.form.get('text_config').value); i++){
       formData.append("data_".concat(i.toString()), this.file_array[i], this.file_array[i].name);
-    }
+    };
 
     //Submit config parameters
     this.submitConfig.submitConfigParams(params).subscribe(data => {
-      console.log("ok stage 1: upload config");
+      console.log("OK stage 1: upload config");
       //submit shapefile files
       this.submitConfig.submitUploadedFiles(formData).subscribe(data => {
-      console.log("Ok stage 2: upload files");
-      })
+        console.log("OK stage 2: upload files");
+        //Close progress spinner
+        dialogRef_spinner.close();
+        //Close the pop-up configuration component
+        this.dialogRef.close();
+        this.dialogRef.afterClosed().subscribe(result => {
+          window.alert("Successfully uploaded configuration");
+        });
+      });
     });
 
 
