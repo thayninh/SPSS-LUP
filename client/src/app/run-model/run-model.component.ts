@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-run-model',
@@ -12,4 +14,6 @@ export class RunModelComponent implements OnInit {
   ngOnInit() {
   }
 
+  color = 'primary';
+  mode = 'indeterminate';
 }

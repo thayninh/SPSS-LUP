@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule, FormGroupName } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule, MatButtonModule } from '@angular/material';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-
+import { GetUuidService } from './services/get-uuid.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -17,6 +17,7 @@ import { RunModelComponent } from './run-model/run-model.component';
 import { ShowResultComponent } from './show-result/show-result.component';
 import { DownloadResultComponent } from './download-result/download-result.component';
 import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
+
 
 
 @NgModule({
@@ -42,9 +43,13 @@ import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.co
   ],
   entryComponents: [
     ConfigurationComponent,
-    ProgressSpinnerComponent
+    ProgressSpinnerComponent,
+    RunModelComponent
   ],
-  providers: [SubmitConfigService],
+  providers: [
+    SubmitConfigService,
+    GetUuidService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

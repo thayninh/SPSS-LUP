@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -26,6 +27,8 @@ var uuid_text_submit;
     text_config: {type:String, require:true, unique:true}
   }, {collection: 'UserData'});
 
+//================================================================================================================
+
   //Route for posting configuration parameters
   router.post('/config', (req, res, next) => {
     this.uuid_text_submit = req.body.text_submit;
@@ -37,17 +40,19 @@ var uuid_text_submit;
       var array_key = Object.keys(req.body);
       var object_param = {};
       for(let i = 0; i < array_key.length; i++){
-        //Do not create data_xxx schema
-        if(array_key[i].indexOf("data_") > -1){
-          continue;
-        }else{
-          object_param[array_key[i]] = "String";
-        } 
+        object_param[array_key[i]] = "String"; 
       } 
       LupaSchema.add(object_param);
 
       //Create a model and update to database
       var param_modem = mongoose.model('param_modem', LupaSchema);
+
+      //Remove existing text_submit if any
+      param_modem.remove({ text_submit: req.body.text_submit }, function (err) {
+        if (err) return handleError(err);
+      });
+
+      //Update configuration parameters to mongoDb
       var params = new param_modem(req.body);
       params.save((err)=>{
         if(!err){
@@ -62,7 +67,9 @@ var uuid_text_submit;
     }
   });
 
-  //Route for uploading shapefile
+//================================================================================================================
+
+//Route for uploading shapefile
   router.post('/upload', upload.any(), (req, res, next) => {
     //Create folder with uuid from text_config to store uploaded files
     let uuid = __dirname + '/upload/' + this.uuid_text_submit;
@@ -81,5 +88,12 @@ var uuid_text_submit;
     res.json({ success: true, message: 'Successfully uploaded'});
   });
 
+//================================================================================================================
+
+//Route for uploading shapefile
+  router.post('/runModel', (req, res, next) => {
+    res.send({ success: true, message: 'Successfully run model'})
+    console.log(req.body.text_submit);
+  });
 module.exports = router;
 

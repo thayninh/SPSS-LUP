@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AfterViewInit, ElementRef, ViewChild } from "@angular/core";
+import { RunModelComponent } from '../run-model/run-model.component';
+import { SubmitConfigService } from './../services/submit-config.service';
+import { GetUuidService } from './../services/get-uuid.service';
 
 //Use declare keyword to use ol - open layer library
 declare var ol: any;
@@ -17,18 +20,22 @@ export class NavbarComponent implements OnInit {
   @ViewChild("mapElement") mapElement: ElementRef;
   public map: any;
 
-  constructor(public dialog:MatDialog) { 
+  constructor(
+    public dialog:MatDialog,
+    private submitConfig: SubmitConfigService,
+    private getuuid: GetUuidService
+  ) {
         //Basemap
         var osm_layer: any = new ol.layer.Tile({
           source: new ol.source.OSM()
         });
-        
+
         //Scale line
         var scaleLineControl = new ol.control.ScaleLine();
-        
+
         //Zoom slider
         var zoomslider = new ol.control.ZoomSlider();
-    
+
         //Overview map
         var overviewMap = new ol.control.OverviewMap({
           className: 'ol-overviewmap ol-custom-overviewmap',
@@ -36,7 +43,7 @@ export class NavbarComponent implements OnInit {
           label: '\u00AB',
           collapsed: true
         });
-        
+
         // note that the target cannot be set here!
         this.map = new ol.Map({
           controls: ol.control.defaults({
@@ -55,7 +62,7 @@ export class NavbarComponent implements OnInit {
       });
       this.map.addControl(zoomslider);
   }
-  
+
   // After view init, the map target can be set!
   ngAfterViewInit() {
     this.map.setTarget(this.mapElement.nativeElement.id);
@@ -67,10 +74,24 @@ export class NavbarComponent implements OnInit {
       width: '100%',
       height: '95%'
     });
+
   }
 
   openRunComponent(){
-    console.log("it is ok");
+    //Open RunModelComponent (progress spinner)
+    let dialogRef = this.dialog.open(RunModelComponent, {});
+
+    //Set UUID parameter
+    let param = {};
+    param["text_submit"] = this.getuuid.uuid_text_submit;
+
+    //Signal that user want to run model with UUID parameter
+    this.submitConfig.submitProcessing(param).subscribe(data=>{
+      dialogRef.close();
+      dialogRef.afterClosed().subscribe(result => {
+        window.alert("Successfully process data");
+      });
+    });
   }
 
   openShowComponent(){
@@ -83,5 +104,5 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
 }

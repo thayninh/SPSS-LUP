@@ -1,3 +1,4 @@
+import { GetUuidService } from './../services/get-uuid.service';
 import { element } from 'protractor';
 import { SubmitConfigService } from './../services/submit-config.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,25 +16,23 @@ const id: string = uuid();
   styleUrls: ['./configuration.component.css']
 })
 export class ConfigurationComponent implements OnInit {
-  form: FormGroup;
-  groupControls: object;
 
-
-  constructor(
-    private formBuider: FormBuilder,
-    private submitConfig: SubmitConfigService,
-    public dialogRef: MatDialogRef<ConfigurationComponent>,
-    public dialog: MatDialog
-  ) {
-    this.groupControls = {
-      text_config: '',
-      text_submit: new FormControl({value: id, disabled:true})
-    };
-    this.form = this.formBuider.group(this.groupControls)
-  }
+    constructor(
+    private formBuider?: FormBuilder,
+    private submitConfig?: SubmitConfigService,
+    private getuuid?: GetUuidService,
+    public dialogRef?: MatDialogRef<ConfigurationComponent>,
+    public dialog?: MatDialog
+  ) {  }
 
   ngOnInit() {
   }
+
+  groupControls: object = {
+    text_config: '',
+    text_submit: new FormControl({value: id, disabled:true})
+  };
+  form: FormGroup = this.formBuider.group(this.groupControls);
 
 //When user click the config, this function will be triggered and create an array with size as
 //input from user for looping, and create an UUID
@@ -71,9 +70,11 @@ onFileChange(fileInput: Event){
   this.file_array[(Number(name.split('_')[1]))] = file;
 }
 
-
 //When user click submit button
   onSubmit(){
+    //Set uuid for variable param_text_submit for using in step 2
+    this.getuuid.uuid_text_submit = this.form.get('text_submit').value;
+
     //Open progress spinner
     let dialogRef_spinner = this.dialog.open(ProgressSpinnerComponent, {
       // width: '50%',
@@ -95,7 +96,7 @@ onFileChange(fileInput: Event){
 
     //Submit config parameters
     this.submitConfig.submitConfigParams(params).subscribe(data => {
-      console.log("OK stage 1: upload config");
+      console.log(data);
       //submit shapefile files
       this.submitConfig.submitUploadedFiles(formData).subscribe(data => {
         console.log("OK stage 2: upload files");
