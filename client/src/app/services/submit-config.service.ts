@@ -12,7 +12,7 @@ export class SubmitConfigService {
 
   //Function for uploading the configuration parameters
   submitConfigParams(params){
-    var headers = new Headers();
+    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.domain + '/api/config', params,{headers:headers}).map(res => res.json());
   }
@@ -20,5 +20,12 @@ export class SubmitConfigService {
   //Function for uploading the uploaded files (shapefile)
   submitUploadedFiles(upload_file){
     return this.http.post(this.domain + '/api/upload', upload_file).map(res => res.json());
+  }
+
+  //Fucntion for singalling processing
+  submitProcessing(params){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.domain + '/api/runModel', params,{headers:headers}).map(res => res.json());
   }
 }
